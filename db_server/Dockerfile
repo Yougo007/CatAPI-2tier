@@ -1,9 +1,20 @@
-FROM postgres
-MAINTAINER franco.fiorese@gmail.com
+# mssql-server-linux
 
-LABEL io.docker-3tier-demo.image-specs="{\"Description\":\"Containerized PostgreSQL\",\"Version\":\"0.1\",\"app-service\":\"redmine.asc\", \"build command\":\"docker build -t f2hex/redmine .\"}"
+# Base OS layer: Latest Ubuntu LTS.
 
-ENV POSTGRES_PORT_5432_TCP=5432
-ENV POSTGRES_USER=redmine
-ENV POSTGRES_PASSWORD=secret
-ENV POSTGRES_DB=redmine
+FROM ubuntu:16.04
+
+# Default SQL Server TCP/Port.
+
+EXPOSE 1433
+
+RUN docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrong(!)Password' -p 1433:1433 -d microsoft/mssql-server-linux:2017-latest
+
+
+# Copy all SQL Server runtime files from build drop into image.
+
+COPY ./install /
+
+# Run SQL Server process.
+
+CMD /opt/mssql/bin/sqlservr

@@ -1,27 +1,20 @@
 
 db_server:
   restart: always
-  image: f2hex/postgres
-  container_name: redmine-db_server
+  image: microsoft/mssql-server-linux
+  container_name: iisapp-db_server
   volumes:
-    - /data/redmine/db:/var/lib/postgresql/data
-  net: redmine
+    - /data/iisapp/db:/var/lib/mssql/data
+  net: iisapp
 
-app_server:
-  restart: always
-  image: f2hex/redmine
-  container_name: redmine-app_server
-  volumes:
-    - /data/redmine/app/files:/usr/src/redmine/files
-  net: redmine
 
 web_server:
   restart: always
-  image: f2hex/nginx
-  container_name: redmine-web_server
+  image: microsoft/iis
+  container_name: iisapp-web_server
   ports:
     - "443:443"
   volumes:
-    - /data/redmine/web/log:/var/log/nginx
-  net: redmine
+    - /data/iisapp/web/log:/var/log/iis
+  net: iisapp
 
