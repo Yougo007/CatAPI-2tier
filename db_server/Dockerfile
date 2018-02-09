@@ -1,20 +1,9 @@
-# mssql-server-linux
+FROM postgres
+MAINTAINER udokporo_ugochukwu@yahoo.co.uk
 
-# Base OS layer: Latest Ubuntu LTS.
-
-FROM ubuntu:16.04
-
-# Default SQL Server TCP/Port.
-
-EXPOSE 1433
-
-RUN docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrong(!)Password' -p 1433:1433 -d microsoft/mssql-server-linux:2017-latest
+ENV POSTGRES_PORT_5432_TCP=5432
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=postgres
+ENV POSTGRES_DB=postgres
 
 
-# Copy all SQL Server runtime files from build drop into image.
-
-COPY ./install /
-
-# Run SQL Server process.
-
-CMD /opt/mssql/bin/sqlservr

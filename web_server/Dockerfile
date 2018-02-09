@@ -1,11 +1,16 @@
-FROM microsoft/iis
+FROM ubuntu
 
-RUN mkdir C:\site
+MAINTAINER udokporo_ugochukwu@yahoo.co.uk
 
-RUN powershell -NoProfile -Command \
-    Import-module IISAdministration; \
-    New-IISSite -Name "Site" -PhysicalPath C:\site -BindingInformation "*:8000:"
+RUN git https://github.com/Yougo007/CatAPI-2tier.git
 
-EXPOSE 8000
+RUN cd web_server/
 
-ADD content/ /site
+WORKDIR /web_server/
+
+#Execute Webserver installation script
+COPY rubywebinstaller.sh .
+RUN chmod +x /rubywebinstaller.sh && ./rubywebinstaller.sh
+
+# Expose rails port
+EXPOSE 3000

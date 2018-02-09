@@ -1,20 +1,15 @@
 
 db_server:
   restart: always
-  image: microsoft/mssql-server-linux
-  container_name: iisapp-db_server
-  volumes:
-    - /data/iisapp/db:/var/lib/mssql/data
-  net: iisapp
-
+  image: postgres
+  container_name: db_server
+  net: yougo
 
 web_server:
   restart: always
-  image: microsoft/iis
-  container_name: iisapp-web_server
+  image: ubuntu
+  container_name: web_server
   ports:
     - "443:443"
-  volumes:
-    - /data/iisapp/web/log:/var/log/iis
-  net: iisapp
+  net: yougo
 
