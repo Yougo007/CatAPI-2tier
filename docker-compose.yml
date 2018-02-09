@@ -14,6 +14,6 @@ web_server:
   ports:
     - "443:443"
   volumes:
-    - /data/yougo/web/log:/var/log/nginx
+    - /data/yougo/web/log:/var/log/rails
   net: yougo
 
