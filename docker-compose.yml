@@ -3,6 +3,8 @@ db_server:
   restart: always
   image: postgres
   container_name: db_server
+  volumes:
+    - /data/yougo/db:/var/lib/postgresql/data
   net: yougo
 
 web_server:
@@ -11,5 +13,7 @@ web_server:
   container_name: web_server
   ports:
     - "443:443"
+  volumes:
+    - /data/yougo/web/log:/var/log/nginx
   net: yougo
 
