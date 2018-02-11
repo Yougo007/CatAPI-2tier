@@ -22,7 +22,11 @@ WORKDIR /usr/app
 
 RUN git init && git clone https://github.com/Yougo007/CatAPI.git
 
-CMD cd Cat*
+CMD cp ~/PythianCatApiDocker/*  ~/CatAPI/
+
+#CMD cd Cat*
+
+WORKDIR /usr/app/CatAPI
 
 #Start Bundle
 CMD bundle install
@@ -33,6 +37,8 @@ CMD bundle install
 #Expose Rails port
 #EXPOSE 3000
 
+
+
 #CMD ["rails", "server", "-b", "0.0.0.0"]
 
-COPY . .
+#COPY . .
