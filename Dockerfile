@@ -20,7 +20,7 @@ RUN mkdir /usr/app
 
 WORKDIR /usr/app
 
-RUN git init && git clone https://github.com/Yougo007/PythianCatApiDocker.git
+RUN git init && git clone https://github.com/Yougo007/CatAPI.git
 
 CMD cd Cat*
 
@@ -31,6 +31,8 @@ CMD bundle install
 #CMD rails server
 
 #Expose Rails port
-EXPOSE 3000
+#EXPOSE 3000
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+#CMD ["rails", "server", "-b", "0.0.0.0"]
+
+COPY . .
