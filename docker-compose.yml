@@ -1,19 +1,13 @@
-
-db_server:
-  restart: always
-  image: postgres
-  container_name: db_server
-  volumes:
-    - /data/yougo/db:/var/lib/postgresql/data
-  net: yougo
-
-web_server:
-  restart: always
-  image: ubuntu
-  container_name: web_server
-  ports:
-    - "443:443"
-  volumes:
-    - /data/yougo/web/log:/var/log/rails
-  net: yougo
-
+version: '3'
+services:
+  db:
+    image: postgres
+  web:
+    build: .
+    #command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
